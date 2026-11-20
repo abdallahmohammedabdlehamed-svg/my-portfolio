@@ -1,0 +1,15 @@
+{
+  "version": 2,
+  "builds": [
+    { "src": "backend/server.js", "use": "@vercel/node" },
+    { "src": "Frontend/**", "use": "@vercel/static" },
+    { "src": "Admin/**", "use": "@vercel/static" }
+  ],
+  "routes": [
+    { "src": "/api/(.*)", "dest": "/backend/server.js" },
+    { "src": "/admin/?$", "status": 302, "headers": { "Location": "/admin/login.html" } },
+    { "src": "/[Aa]dmin/(.*)", "dest": "/Admin/$1" },
+    { "src": "/$", "dest": "/Frontend/index.html" },
+    { "src": "/(.*)", "dest": "/Frontend/$1" }
+  ]
+}

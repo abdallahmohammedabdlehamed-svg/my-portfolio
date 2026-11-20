@@ -42,16 +42,15 @@ app.get("/admin", (req, res) => {
   res.redirect("/admin/login.html");
 });
 
-// Server Configuration
+// Connect Database
+connectDB();
+
+// Start Server Locally
 const PORT = process.env.PORT || 5000;
-
-// Connect Database and Start Server
-const startServer = async () => {
-  await connectDB();
-
+if (!process.env.VERCEL) {
   app.listen(PORT, () => {
     console.log(`Server running on http://localhost:${PORT}`);
   });
-};
+}
 
-startServer();
+module.exports = app;
