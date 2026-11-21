@@ -88,7 +88,7 @@ document.addEventListener("DOMContentLoaded", () => {
   
 
   toggleBtn.addEventListener("click", () => {
-    if (window.innerWidth <= 992) {
+    if (window.matchMedia("(max-width: 992px)").matches) {
       sidebar.classList.toggle("mobile-open");
       overlay.classList.toggle("active");
     } else {
@@ -105,7 +105,7 @@ document.addEventListener("DOMContentLoaded", () => {
     item.addEventListener("click", (e) => {
       e.preventDefault();
       switchPage(item.dataset.page);
-      if (window.innerWidth <= 992) {
+      if (window.matchMedia("(max-width: 992px)").matches) {
         sidebar.classList.remove("mobile-open");
         overlay.classList.remove("active");
       }
