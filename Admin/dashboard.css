@@ -2470,3 +2470,15 @@ button {
   border-color: #ef4444;
   color: #fca5a5;
 }
+
+
+@media (max-width: 576px) {
+  .notif-dropdown {
+    position: fixed;
+    top: calc(var(--topbar-height) + 8px);
+    left: 14px;
+    right: 14px;
+    width: auto;
+    max-width: none;
+  }
+}

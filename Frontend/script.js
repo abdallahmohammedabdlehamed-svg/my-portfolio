@@ -170,7 +170,25 @@ document.addEventListener("DOMContentLoaded", () => {
 
     if (!slider) return;
 
-    const cards = slider.querySelectorAll(".testimonial-card");
+   const cards = slider.querySelectorAll(".testimonial-card");
+    const dotsContainer = document.getElementById("testimonialDots");
+
+    // توليد النقاط وترقيم الكروت تلقائياً حسب العدد الفعلي
+    if (dotsContainer) {
+        dotsContainer.innerHTML = "";
+        cards.forEach((card, i) => {
+            const dot = document.createElement("button");
+            dot.className = i === 0 ? "testimonial-dot active" : "testimonial-dot";
+            dot.setAttribute("aria-label", `Go to testimonial ${i + 1}`);
+            dotsContainer.appendChild(dot);
+
+            const counterSpan = card.querySelector(".testimonial-footer span:last-child");
+            if (counterSpan) {
+                counterSpan.textContent = `${String(i + 1).padStart(2, "0")} / ${String(cards.length).padStart(2, "0")}`;
+            }
+        });
+    }
+
     const dots = slider.querySelectorAll(".testimonial-dot");
 
     const prevBtn = document.getElementById("testimonialPrev");
@@ -548,4 +566,35 @@ document.addEventListener("DOMContentLoaded", () => {
       window.location.href = window.location.port === "5500" ? "../Admin/login.html" : "/admin";
     }
   });
+
+  // 4. مزامنة صورة الصفحة الرئيسية مع صورة الأدمن في الإعدادات
+  const DEFAULT_HERO_AVATAR = "imgs/1786145734252.jpg";
+  const heroProfileImg = document.getElementById("heroProfileImg");
+
+  async function syncHeroProfileImage() {
+    if (!heroProfileImg) return;
+
+    const cachedAvatar = localStorage.getItem("portfolio_hero_avatar");
+    if (cachedAvatar) {
+      heroProfileImg.src = cachedAvatar;
+    }
+
+    try {
+      const res = await fetch(`${API_BASE}/admin/profile`);
+      const data = await res.json();
+      if (data.success && data.admin) {
+        if (data.admin.avatar) {
+          heroProfileImg.src = data.admin.avatar;
+          localStorage.setItem("portfolio_hero_avatar", data.admin.avatar);
+        } else {
+          heroProfileImg.src = DEFAULT_HERO_AVATAR;
+          localStorage.removeItem("portfolio_hero_avatar");
+        }
+      }
+    } catch (_) {
+      // في حالة عدم اتصال السيرفر تظل الصورة الافتراضية ظاهرة
+    }
+  }
+
+  syncHeroProfileImage();
 });
