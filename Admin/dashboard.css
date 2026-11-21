@@ -2203,29 +2203,17 @@ button {
   display: flex;
   align-items: center;
   gap: 14px;
-  min-width: 0;
-  max-width: 100%;
-}
-
-.reader-sender-info {
-  min-width: 0;
-  flex: 1;
 }
 
 .reader-sender-info h3 {
   font-size: 1.12rem;
   margin-bottom: 3px;
-  overflow-wrap: anywhere;
 }
 
 .reader-sender-email {
-  display: inline-block;
-  max-width: 100%;
   font-size: 0.85rem;
   color: #93c5fd;
   text-decoration: none;
-  overflow-wrap: anywhere;
-  word-break: break-word;
 }
 
 .reader-sender-email:hover {
@@ -2250,8 +2238,6 @@ button {
   font-size: 0.92rem;
   font-weight: 600;
   color: #e9d5ff;
-  overflow-wrap: anywhere;
-  word-break: break-word;
 }
 
 .reader-message-content {
@@ -2260,8 +2246,6 @@ button {
   line-height: 1.75;
   color: #e2e8f0;
   white-space: pre-wrap;
-  overflow-wrap: anywhere;
-  word-break: break-word;
   background: #0d1120;
   border: 1px solid var(--border-subtle);
   border-radius: 14px;
@@ -2285,22 +2269,11 @@ button {
 
 @media (max-width: 992px) {
   .inbox-split-layout {
-    grid-template-columns: minmax(0, 1fr);
-  }
-
-  .inbox-list-pane,
-  .inbox-reader-pane {
-    min-width: 0;
-    max-width: 100%;
-    width: 100%;
+    grid-template-columns: 1fr;
   }
 
   .inbox-list-pane {
     max-height: 360px;
-  }
-
-  .inbox-reader-pane {
-    padding: 20px 16px;
   }
 }
 
