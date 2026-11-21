@@ -34,11 +34,13 @@
   box-sizing: border-box;
 }
 
+html,
 body {
   font-family: "Inter", -apple-system, BlinkMacSystemFont, sans-serif;
   background-color: var(--bg-body);
   color: var(--text-primary);
   min-height: 100vh;
+  max-width: 100%;
   overflow-x: hidden;
   -webkit-font-smoothing: antialiased;
 }
@@ -740,6 +742,11 @@ button {
   .welcome-text h2 {
     font-size: 1.45rem;
   }
+
+  .date-dropdown-menu {
+    left: 0;
+    right: auto;
+  }
 }
 
 
@@ -750,7 +757,7 @@ button {
 ========================================================= */
 .analytics-grid {
   display: grid;
-  grid-template-columns: 1.05fr 0.95fr;
+  grid-template-columns: minmax(0, 1.05fr) minmax(0, 0.95fr);
   gap: 20px;
   margin-top: 24px;
 }
@@ -760,6 +767,8 @@ button {
   border: 1px solid var(--border-subtle);
   border-radius: 18px;
   padding: 24px;
+  min-width: 0;
+  max-width: 100%;
   box-shadow: 0 10px 26px rgba(6, 9, 20, 0.4);
   transition: var(--transition);
 }
@@ -1053,7 +1062,7 @@ button {
 /* Responsive Breakpoints for Part 3 */
 @media (max-width: 1150px) {
   .analytics-grid {
-    grid-template-columns: 1fr;
+    grid-template-columns: minmax(0, 1fr);
   }
 }
 
@@ -1076,7 +1085,7 @@ button {
 ========================================================= */
 .bottom-actions-grid {
   display: grid;
-  grid-template-columns: 1.85fr 1fr;
+  grid-template-columns: minmax(0, 1.85fr) minmax(0, 1fr);
   gap: 20px;
   margin-top: 24px;
 }
@@ -1224,7 +1233,7 @@ button {
 /* Responsive Breakpoints for Part 4 */
 @media (max-width: 1150px) {
   .bottom-actions-grid {
-    grid-template-columns: 1fr;
+    grid-template-columns: minmax(0, 1fr);
   }
 }
 
@@ -2203,17 +2212,29 @@ button {
   display: flex;
   align-items: center;
   gap: 14px;
+  min-width: 0;
+  max-width: 100%;
+}
+
+.reader-sender-info {
+  min-width: 0;
+  flex: 1;
 }
 
 .reader-sender-info h3 {
   font-size: 1.12rem;
   margin-bottom: 3px;
+  overflow-wrap: anywhere;
 }
 
 .reader-sender-email {
+  display: inline-block;
+  max-width: 100%;
   font-size: 0.85rem;
   color: #93c5fd;
   text-decoration: none;
+  overflow-wrap: anywhere;
+  word-break: break-word;
 }
 
 .reader-sender-email:hover {
@@ -2238,6 +2259,8 @@ button {
   font-size: 0.92rem;
   font-weight: 600;
   color: #e9d5ff;
+  overflow-wrap: anywhere;
+  word-break: break-word;
 }
 
 .reader-message-content {
@@ -2246,6 +2269,8 @@ button {
   line-height: 1.75;
   color: #e2e8f0;
   white-space: pre-wrap;
+  overflow-wrap: anywhere;
+  word-break: break-word;
   background: #0d1120;
   border: 1px solid var(--border-subtle);
   border-radius: 14px;
@@ -2269,11 +2294,22 @@ button {
 
 @media (max-width: 992px) {
   .inbox-split-layout {
-    grid-template-columns: 1fr;
+    grid-template-columns: minmax(0, 1fr);
+  }
+
+  .inbox-list-pane,
+  .inbox-reader-pane {
+    min-width: 0;
+    max-width: 100%;
+    width: 100%;
   }
 
   .inbox-list-pane {
     max-height: 360px;
+  }
+
+  .inbox-reader-pane {
+    padding: 20px 16px;
   }
 }
 
